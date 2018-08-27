@@ -1,0 +1,70 @@
+Reducers are used to allow actions within the context.js. These actions are then accessible by all components that have the Consumer element wrapped around their code.
+
+1) Create a reducer variable in the context.js file above the Class declaraction
+
+    const reducer = (state, action) => {
+
+    }
+
+    export class Provider extends Components {
+
+    }
+
+2) Witin the reducer function use a switch statement to create the different returns based on the action type provided.
+    ** When an action is called, an object is passed into the reducer and one of the properties of that action object is a type. This type is a string and it is used to determine what action to take based on the action type provided **
+
+    ** Another property of the action is the payload. While the action type is a string that determines what type of action to take, the payload is data of any type that is typically sent in order for the action to perform something using that payload. **
+
+    const reducer = (state, action) => {
+        switch(action.type) {
+            case 'DELETE_CONTACT':
+                return {
+                    ...state,
+                    contacts: state.contacts.filter(contact => contact.id !== action.payload);
+                }
+            default:
+                return state;
+        }
+    }    
+
+3) In order to call the reducer action, you need a method within the state that can be called by any component that uses the Consumer elements.
+
+    dispatch: action => {
+        this.setState(state => reducer(state, action))
+    }
+
+4) Within the component that you want to use the reducer method import the Consumer and surround the code in a Consumer element. Ensure that the Consumer element also has the value argument as part of an arrow function and that the arrow function returns all the code in the component file.
+
+    import { Consumer } from '../context';
+
+    ...
+
+    render() {
+        return (
+            <Consumer>
+                {value => {
+                    return (
+                        ....
+                    )
+                }}
+            </Consumer>
+        )
+    }
+
+5) Within the code within the onClick() property function, bind the payload and the reducer method to the property function.
+
+    ** In the below, id is the payload and dispatch is the method brought in from the context state.
+
+    const { dispatch } = value;
+    ...
+    onClick={this.onDeleteClick.bind(this, id, dispatch)}
+
+6) Within the function above the Class declaraction
+
+    onDeleteClick = (id, dispatch) => {
+        dispatch({ type: 'DELETE_CONTACT', payload: id });
+    }
+    ...
+    const { dispatch } = value;
+    ...
+    onClick={this.onDeleteClick.bind(this, id, dispatch)}

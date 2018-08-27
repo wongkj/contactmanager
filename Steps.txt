@@ -1,0 +1,206 @@
+
+Steps to creating a React App
+
+1) Install React globally on your local computer
+
+npm install -g create-react-app
+
+2) Use your command prompt to create a new React Application
+
+create-react-app **name of app**
+
+3) Start the Dev Server
+
+npm start
+
+4) Delete all the styling from the boilerplate code. Delete the index.css file and remove it's import from index.js. Also clear all the code from app.css.
+
+5) Create folder for Components. Start building Components. Create a js file in Components folder with name of the new component. (React Front Back - Lecture 15 onwards)
+
+Class Component:
+
+import React, { Component } from 'react'
+
+export default class Contact extends Component {
+  render() {
+    return (
+      <div>
+        
+      </div>
+    )
+  }
+}
+
+Functional Component:
+
+const Header = () => {
+  return (
+    <div>
+        <h1>Hello World</h1>
+    </div>
+  )
+}
+
+export default Header;
+
+6) Install bootstrap into project. Type in the terminal:
+
+npm install bootstrap
+
+7) Introduce State to your Components (Reacg Front Back - Lecture 21)
+
+8) Use the Context API (React Front Back - Lecture 25)
+  a) Create a context.js file in the root of the src folder.
+  b) Create a Class Component called Provider that extends from Component.
+  c) Create a React Context variable called Context right above the class declaration.
+        const Context = React.createContext();
+  d) Cut the state from the file it's located in and place it inside the Context component right above the render() and below the Class declaration.
+  e) In app.js import the Provider from context.js.
+  f) Wrap the return code of the class inside the Provider elements.
+        return (
+          <Provider>
+            .....
+          </Provider>
+        )
+  e) Within context.js, in the return() of the Provider Class, place a Context.Provider element with a value equal to this.state, and inside the tags place this.props.children.
+        render() {  
+          return (
+              <Context.Provider value={this.state}>
+                  {this.props.children}
+              </Context.Provider>
+          )
+        }
+  f) At the bottom of the context.js file, place an export of the Context.Consumer property:
+      export const Consumer = Context.Consumer;
+  g) In the js file that you want to start using the state, import the Consumer from context.js
+      import {Consumer} from '../context';
+  h) Wrap the return() code of the render() method with a Consumer element:
+      return (
+        <Consumer>
+          ...
+        </Consumer>
+      )
+  i) Use a value arrow function to return the code from within the JS file that is consuming the state.
+      <Consumer>
+        {
+          value => {
+            const { contacts } = value;
+            return (
+
+            )
+          }
+        }
+      </Consumer>
+
+9) Create a form (React Front Back - Lecture 27)
+
+10) Create the routing (React Front Back Lecture 33)
+11) Create the link to the other pages (React Front Back - Lecture 34)
+12) asdfasdawsdf
+13) asdgasdgasf
+14) afsdgasdfsdaf
+15) asdfasdfasdf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

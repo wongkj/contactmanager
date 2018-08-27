@@ -1,0 +1,80 @@
+
+The Context API is a single place where we can have our application state, so if you wanted to access information on a global setting you can do that.
+
+1) Create a context.js file on the same level as the src folder.
+2) In the context.js file create a Class Component.
+3) Above the Class code, create a React Context variable.
+
+    const Context = React.createContext();
+
+4) Place your state inside the Class but above the render().
+5) In the return () of the Class, place a Context.Provider element with a property called value.
+    
+    ** Anything you want to become available throughout the application you want to put in the property called value **
+
+    render() {
+        return (
+            <Context.Provider value={this.state}>
+
+            </Context.Provider>
+        )
+    }
+
+6) Inside the Context.Provder element, the only thing you want to place in there is children of all the props.
+
+    render() {
+        return (
+            <Context.Provider value={this.state}>
+                {this.props.children}
+            </Context.Provider>
+        )
+    }
+
+7) At the bottom of the context.js file, add the export of the Consumer. We will use the <Consumer> element to provide access to the state or actions within any component that needs to.
+
+    ** Actions are functions within the state in a Context API used to manipulate the state by any components that needs to **
+
+    export const Consumer = Context.Consumer;
+
+
+8) In the main js file (the app.js file), you need to import the Provider.
+
+    import { Provider } from './context';
+
+9) In the app.js file wrap everything in the render() return() in a <Provider> element.
+
+    render() {
+        return (
+            <Provider>
+                ...
+            </Provider>
+        )
+    }    
+
+10) Go to the js file that you want to use the Context state and import the Consumer of the Context state.
+
+    import { Consumer } from '../context';
+
+11) Below in the return() you need to return the value from the context.js (this value contains the context.state) and within that value, you return the rest of your code by cutting and pasting it within the return.
+
+    render() {
+        return (
+            {value => {
+                return (
+                    .....
+                )
+            }}
+        )
+    }
+
+12) Use destructuring to pull any objects from the value into the js file where you want to use the properties of the value. Pulling the value is essentially pulling the state as value was assigned the this.state in context.js.
+
+        return (
+            const { contacts } = value;
+            {value => {
+                return (
+                    .....
+                )
+            }}
+        )
+
